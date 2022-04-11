@@ -30,7 +30,7 @@ def fileDel():
                 print(Lb1.get(sb))
                 Lb1.delete(sb)
                 
-        except:
+        except NameError:
             tkinter.messagebox.showwarning(title="Atenção!", message="Nenhum item selecionado")
     else:
         tkinter.messagebox.showwarning(title="Atenção!", message="Nenhum item selecionado")
@@ -41,7 +41,7 @@ def cleanList():
             Lb1.delete(0, END)
             tkinter.messagebox.showinfo(title="Sucesso!", message="A lista foi limpa")
 
-        except:
+        except NameError:
             tkinter.messagebox.showerror(title="Erro!", message="Não foi possível limpar a lista.")
     else:
         tkinter.messagebox.showwarning(title="Atenção!", message="Lista vazia!")
@@ -56,10 +56,22 @@ def fileAdd():
         try:
 
             for fl in filenames:
-                Lb1.insert(END, fl)
-                counter+=1
+                name, ext = os.path.splitext(fl)
+                if(ext.upper() ==".PDF"):
+                    Lb1.insert(END, fl)
+                    counter+=1
+                elif(ext.upper() ==".PNG" or ext.upper() == ".JPG" or ext.upper() == ".JPEG"):
+                    os.remove( name.replace("/","\\") + '.pdf')
+                    image_tmp = Image.open(r''+fl)
+                    image_tmp.show()
+                    im_temp = image_tmp.convert('RGB')
+                    im_temp.save(r''+name.replace("/","\'") + '.pdf')
+                    Lb1.insert(END, name + '.pdf')
+                    counter+=1
+                else:
+                    tkinter.messagebox.showerror(title="ERRO!", message="Um ou mais arquivos não pode ser unificado. Só são aceitos arquivos PDF e imagens (JPG, JPEG, PNG)")
 
-        except:
+        except NameError:
             Lb1.activate(0)
 
         finally:
@@ -86,7 +98,7 @@ def moveUP():
 
                 print(pos)
                 # print(text)
-            except:
+            except NameError:
                 tkinter.messagebox.showwarning(title="Atenção!", message="Nenhum item selecionado") 
         else:
             tkinter.messagebox.showwarning(title="Atenção!", message="Selecione apenas 1 item para mover")
@@ -110,7 +122,7 @@ def moveDOWN():
 
                 print(pos)
                 # print(text)
-            except:
+            except NameError:
                 tkinter.messagebox.showwarning(title="Atenção!", message="Nenhum item selecionado") 
         else:
             tkinter.messagebox.showwarning(title="Atenção!", message="Selecione apenas 1 item para mover")
@@ -129,7 +141,7 @@ def pdfJoin(pdfs, filename):
         # Path("./result.pdf").rename(filename)
         tkinter.messagebox.showinfo(title="SUCESSO!", message="PDF unificado: "+filename)
         os.startfile(filename)
-    except:
+    except NameError:
         tkinter.messagebox.showerror(title="ERRO!", message="Falha ao unir os arquivos")
 
 def mergePDFs():
