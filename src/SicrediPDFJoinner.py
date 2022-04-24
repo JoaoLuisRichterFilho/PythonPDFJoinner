@@ -52,20 +52,20 @@ def img_to_pdf(path_img):
         user = os.getenv('USERNAME')
         image_tmp = Image.open(r''+path_img)
 
-        exif = image_tmp._getexif()
+        # exif = image_tmp._getexif()
 
-        orientation = exif[274]
+        # orientation = exif[274]
 
-        print(orientation)
+        # print(orientation)
 
-       
+        # if orientation == 3:
+        #     image_tmp=image_tmp.transpose(Image.Transpose.ROTATE_180)
+        # elif orientation == 6:
+        #     image_tmp=image_tmp.transpose(Image.Transpose.ROTATE_270)
+        # elif orientation == 8:
+        #     image_tmp=image_tmp.rotate(90, expand=False)
 
-        if orientation == 3:
-            image_tmp=image_tmp.transpose(Image.Transpose.ROTATE_180)
-        elif orientation == 6:
-            image_tmp=image_tmp.transpose(Image.Transpose.ROTATE_270)
-        elif orientation == 8:
-            image_tmp=image_tmp.rotate(90, expand=False)
+
         # for orientation in ExifTags.TAGS.keys():
         #     print(ExifTags.TAGS[orientation])
         #     if ExifTags.TAGS[orientation]=='Orientation':
@@ -103,7 +103,7 @@ def cleanList():
     if(Lb1.size() > 0):
         try:
             Lb1.delete(0, END)
-            tkinter.messagebox.showinfo(title="Sucesso!", message="A lista foi limpa")
+            # tkinter.messagebox.showinfo(title="Sucesso!", message="A lista foi limpa")
 
         except NameError:
             tkinter.messagebox.showerror(title="Erro!", message="Não foi possível limpar a lista.")
@@ -230,6 +230,7 @@ def pdfJoin(pdfs, filename):
         # Path("./result.pdf").rename(filename)
         changeBtnState(btnJOIN)
         tkinter.messagebox.showinfo(title="SUCESSO!", message="PDF unificado: "+filename)
+        cleanList()
         os.startfile(filename)
 
     except NameError:
