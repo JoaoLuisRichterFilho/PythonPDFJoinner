@@ -1,7 +1,7 @@
 # PythonPDFJoinner
 
 # Demo:
-https://user-images.githubusercontent.com/82986559/189069759-89df08a4-d342-4371-babc-2020df5e943f.mp4
+https://user-images.githubusercontent.com/82986559/189071717-aba36f37-feba-4463-9c74-9d70370f6096.mp4
 
 Unificador de PDFs criado em Python
 # Funcionalidades:
